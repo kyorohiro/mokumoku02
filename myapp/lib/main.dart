@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './assets.dart' as assets;
 import './client.dart' as client;
 
 
@@ -175,6 +174,8 @@ Widget testWidget() {
       
       return Container(
         height: 200,
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         color: (index%2==0?Colors.red:Colors.blue),
         child: Row(
 
@@ -209,24 +210,55 @@ Widget testWidget() {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                         RaisedButton(
-                            onPressed: (){
-                              print("clicked ${id}");
-                              __cart.addItem(
-                                CartItem()
-                                ..id = item.id
-                                ..name = item.title
-                                ..price = item.price
-                                ..item = item
-                                );
-                            },
-                            child: Icon(
-                              Icons.add_shopping_cart,
-                              color: Colors.pink,
-                              size: 24.0,
+                        // + button
+                        Container(
+                          width: 45,
+                          child: 
+                            RaisedButton(
+                              onPressed: (){
+                                print("clicked ${id}");
+                                __cart.addItem(
+                                  CartItem()
+                                  ..id = item.id
+                                  ..name = item.title
+                                  ..price = item.price
+                                  ..item = item
+                                  );
+                              },
+                              child: Text("+"),
                             ),
-                         ),
-                        Text("800",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,),
+                            
+                        ),
+                        
+                        Container(
+                          color: Colors.white,
+                          height: 35,
+                          width: 45,
+                          child: Align(alignment: Alignment.center,child:Text("1")),
+                        ),
+                        // - button
+                        Container(
+                          width: 45,
+                          child: 
+                            RaisedButton(
+                              onPressed: (){
+                                print("clicked ${id}");
+                                __cart.addItem(
+                                  CartItem()
+                                  ..id = item.id
+                                  ..name = item.title
+                                  ..price = item.price
+                                  ..item = item
+                                  );
+                              },
+                              child: Text("-"),
+                            ),
+                            
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 30),
+                          child: Text("800",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,)
+                        )
                       ],)
                      
                   ),    
