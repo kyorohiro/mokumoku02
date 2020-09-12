@@ -18,6 +18,14 @@ B-san
   - order !!
 
 
+## Matome 
+
+- dev.to  
+https://dev.to/kyorohiro/todo-dart-x-flutter-mokumoku-live-coding-12-09-2020-bbm
+
+- qiita  
+https://qiita.com/kyorohiro/items/2bb6095f90110c0a7cd6
+
 
 # ref
 
