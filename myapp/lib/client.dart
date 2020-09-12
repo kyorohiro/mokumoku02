@@ -3,17 +3,20 @@ import './assets.dart' as assets;
 
 abstract class Item {
   String id;
-  String title;
+  String name;
   int price;
   bool hasImage;
   Future<Image> getImage();
+  // https://stackoverflow.com/questions/20577606/whats-a-good-recipe-for-overriding-hashcode-in-dart
+  bool operator ==(o) => o is Item && o.id == this.id;
+  int get hashCode => id.hashCode;
 }
 
 class TestItem extends Item {
   String assetPath;
   TestItem(String id, String title, int price, this.assetPath) {
     this.id = id;
-    this.title = title;
+    this.name = title;
     this.price = price;
   }
 
@@ -24,6 +27,7 @@ class TestItem extends Item {
   }
 }
 
+// Mock now
 class MenuClient {
   Future<List<Item>> getMenus() async {
     return <Item>[

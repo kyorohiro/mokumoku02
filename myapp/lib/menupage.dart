@@ -19,10 +19,6 @@ class MyMenuPage extends StatelessWidget {
             onPressed: (){
               print("click backet");
               Navigator.pushNamed(context, "/cart");
-              /*
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return basketpage.MyBasket();
-              },));*/
           })
         ],
       ),
@@ -41,7 +37,25 @@ class MenuItemWidget extends StatefulWidget {
 class _MenuItemWidgetState extends State<MenuItemWidget> {
   @override
   Widget build(BuildContext context) {
-    return testWidget();
+    return ListView.builder(
+      itemCount: appcontext.todoMenus.length,
+      itemBuilder: (context, index) {
+        var item = appcontext.todoMenus[index];
+        
+        return Container(
+          height: 200,
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          color: (index%2==0?Colors.red:Colors.blue),
+          child: Row(
+            mainAxisSize: MainAxisSize.min ,
+            children: [
+              parts.ImageWithLoading(200,item.getImage),
+              Expanded(child: menuItemWidget(item.id, item)),
+            ],
+          ),
+        );     
+      },);
   }
 
   Widget numOfItemWIdget(String id, client.Item item) {
@@ -54,16 +68,8 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
                 RaisedButton(
                   onPressed: (){
                     print("clicked ${id}");
-                    appcontext.cart.plusItem(
-                      appcontext.CartItem()
-                      ..id = item.id
-                      ..name = item.title
-                      ..price = item.price
-                      ..item = item
-                      );
-                      setState(() {
-                        
-                      });
+                    appcontext.cart.plusItem(item);
+                      setState(() {});
                   },
                   child: Text("+"),
                 ),
@@ -83,16 +89,8 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
                 RaisedButton(
                   onPressed: (){
                     print("clicked ${id}");
-                    appcontext.cart.minusItem(
-                      appcontext.CartItem()
-                      ..id = item.id
-                      ..name = item.title
-                      ..price = item.price
-                      ..item = item
-                      );
-                      setState(() {
-                        
-                      });
+                    appcontext.cart.minusItem(item);
+                      setState(() {});
                   },
                   child: Text("-"),
                 ),
@@ -111,7 +109,7 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
                 Container(
                   height: 60,
                   color: Colors.black38,
-                  child: Text(item.title, style: TextStyle(fontSize: 40.0),),
+                  child: Text(item.name, style: TextStyle(fontSize: 40.0),),
                 ),          
                 // menu item description        
                 Container(
@@ -138,34 +136,5 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
                 ),    
               ],)
           );
-  }
-  Widget testWidget() {
-
-    return ListView.builder(
-      itemCount: appcontext.todoMenus.length,
-      itemBuilder: (context, index) {
-        var item = appcontext.todoMenus[index];
-        var title = item.title; 
-        var id = item.id;
-        
-        return Container(
-          height: 200,
-          margin: EdgeInsets.all(10),
-          padding: EdgeInsets.all(10),
-          color: (index%2==0?Colors.red:Colors.blue),
-          child: Row(
-
-            mainAxisSize: MainAxisSize.min ,
-            children: [
-              //
-              // Container(width: 200,height: 200, color: Colors.amber,),
-              parts.ImageWithLoading(200,item.getImage),
-              //
-              //
-              Expanded(child: menuItemWidget(id, item)),
-            ],
-          ),
-        );     
-      },);
   }
 }

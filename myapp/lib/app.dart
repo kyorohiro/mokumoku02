@@ -4,18 +4,10 @@ List<client.Item> todoMenus;
 Cart cart = new Cart();
 
 
-class CartItem {
-  String id;
-  String name;
-  int price;
-  // ...
-  client.Item item;
-}
-
 class Cart {
-  Map<String,CartItem>  items = {};
+  Map<String, client.Item>  items = {};
   Map<String,int>  numberOfOrderSet = {};
-  plusItem(CartItem item) {
+  plusItem(client.Item item) {
     items[item.id] = item;
     if(!numberOfOrderSet.containsKey(item.id)) {
       numberOfOrderSet[item.id] = 1;
@@ -24,10 +16,15 @@ class Cart {
     }
   }
 
-  minusItem(CartItem item) {
-    if(numberOfOrderSet.containsKey(item.id)) {
-      numberOfOrderSet[item.id] = numberOfOrderSet[item.id] - 1;
+  minusItem(client.Item item) {
+    if(!numberOfOrderSet.containsKey(item.id)) {
+      return;
     }
+    if(numberOfOrderSet[item.id] <= 0){
+      return;
+    }
+
+    numberOfOrderSet[item.id] = numberOfOrderSet[item.id] - 1;
   }
 
   bool contain(String id){

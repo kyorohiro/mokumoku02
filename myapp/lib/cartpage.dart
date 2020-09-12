@@ -27,7 +27,7 @@ class MyBasket extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var itemIds =  appcontext.cart.items.keys.toList();
-    var items = itemIds.map((e) => menuItemWidget(screenWidth,appcontext.cart.items[e].item)).toList();
+    var items = itemIds.map((e) => menuItemWidget(screenWidth,appcontext.cart.items[e])).toList();
 
     return Scaffold(
       appBar: AppBar(title: Text("Cart!!"),),
