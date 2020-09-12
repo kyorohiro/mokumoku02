@@ -28,11 +28,11 @@ class MenuClient {
   Future<List<Item>> getMenus() async {
     return <Item>[
       TestItem("01", "pizza", 800, assets.images_food_pizza_slice_fast_jpg),
-      TestItem("02", "squid", 800, assets.images_food_dim_sum_squid_jpg),
-      TestItem("03", "cheese bowls", 800, assets.images_food_chili_cheese_bowls_jpg),
-      TestItem("04", "flower", 800, assets.images_flower_orange_calendula_bright_0_jpg),
-      TestItem("05", "pasta", 800, assets.images_food_pasta_tomato_theme_jpg),
-      TestItem("06", "chocolate desert", 800, assets.images_food_purple_chocolate_dessert_jpg)
+      TestItem("02", "squid", 1200, assets.images_food_dim_sum_squid_jpg),
+      TestItem("03", "cheese bowls", 200, assets.images_food_chili_cheese_bowls_jpg),
+      TestItem("04", "flower", 900, assets.images_flower_orange_calendula_bright_0_jpg),
+      TestItem("05", "pasta", 300, assets.images_food_pasta_tomato_theme_jpg),
+      TestItem("06", "chocolate desert", 80, assets.images_food_purple_chocolate_dessert_jpg)
     ];
   } 
 }

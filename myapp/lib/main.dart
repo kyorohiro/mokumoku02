@@ -11,7 +11,7 @@ import './app.dart' as appcontext;
 
 
 void main() async {
-  // test 
+  // todo load in Widget
   appcontext.todoMenus = await client.createMenuClient().getMenus();
 
   runApp( MaterialApp(
@@ -42,10 +42,8 @@ class MyBasket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    var density = MediaQuery.of(context).devicePixelRatio; 
     var itemIds =  appcontext.cart.items.keys.toList();
     var items = itemIds.map((e) => menuItemWidget(screenWidth,appcontext.cart.items[e].item)).toList();
-   // var items = itemIds.map((e) => Text("${__cart.items[e].name}")).toList();
 
     return Scaffold(
       appBar: AppBar(title: Text("Cart!!"),),
@@ -82,7 +80,6 @@ class MyBasket extends StatelessWidget {
 }
 
 Widget menuItemWidget(double screenWidth, client.Item item){
-  print(">>${screenWidth}");
   var info = Container(
     width: screenWidth-100,
     color: Colors.white30,
