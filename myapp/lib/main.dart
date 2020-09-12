@@ -71,7 +71,7 @@ class MyBasket extends StatelessWidget {
       body:
       SingleChildScrollView(
         child: Column(
-          children: /*[
+          children: [
             titleWidget(),
             Container(
               child: Column(
@@ -81,8 +81,7 @@ class MyBasket extends StatelessWidget {
             RaisedButton(onPressed: (){
               print("order");
             }, child: Text("Order!!"),)
-            ]*/
-            items,
+            ]
 
         ),
       )
@@ -104,7 +103,7 @@ class MyBasket extends StatelessWidget {
 Widget menuItemWidget(double screenWidth, client.Item item){
   print(">>${screenWidth}");
   var info = Container(
-    width: screenWidth-200,
+    width: screenWidth-100,
     color: Colors.white30,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
