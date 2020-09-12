@@ -42,6 +42,63 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
     return testWidget();
   }
 
+  Widget numOfItemWIdget(String id, client.Item item) {
+    return Container(
+      child: Row(children: [
+            // + button
+            Container(
+              width: 45,
+              child: 
+                RaisedButton(
+                  onPressed: (){
+                    print("clicked ${id}");
+                    appcontext.cart.plusItem(
+                      appcontext.CartItem()
+                      ..id = item.id
+                      ..name = item.title
+                      ..price = item.price
+                      ..item = item
+                      );
+                      setState(() {
+                        
+                      });
+                  },
+                  child: Text("+"),
+                ),
+                
+            ),
+            
+            Container(
+              color: Colors.white,
+              height: 35,
+              width: 45,
+              child: Align(alignment: Alignment.center,child:Text("${appcontext.cart.getNumberOfOrder(item.id)}")),
+            ),
+            // - button
+            Container(
+              width: 45,
+              child: 
+                RaisedButton(
+                  onPressed: (){
+                    print("clicked ${id}");
+                    appcontext.cart.minusItem(
+                      appcontext.CartItem()
+                      ..id = item.id
+                      ..name = item.title
+                      ..price = item.price
+                      ..item = item
+                      );
+                      setState(() {
+                        
+                      });
+                  },
+                  child: Text("-"),
+                ),
+                
+            ),
+      ],),
+    );
+  }
   Widget menuItemWidget(String id, client.Item item) {
     return Container(
             color: Colors.white30,
@@ -63,63 +120,13 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
 
                 // menu item price
                 Container(
-                  width: 3000,
+                  //width: 3000,
                   height: 60,
                   color: Colors.black38,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // + button
-                      Container(
-                        width: 45,
-                        child: 
-                          RaisedButton(
-                            onPressed: (){
-                              print("clicked ${id}");
-                              appcontext.cart.plusItem(
-                                appcontext.CartItem()
-                                ..id = item.id
-                                ..name = item.title
-                                ..price = item.price
-                                ..item = item
-                                );
-                                setState(() {
-                                  
-                                });
-                            },
-                            child: Text("+"),
-                          ),
-                          
-                      ),
-                      
-                      Container(
-                        color: Colors.white,
-                        height: 35,
-                        width: 45,
-                        child: Align(alignment: Alignment.center,child:Text("${appcontext.cart.getNumberOfOrder(item.id)}")),
-                      ),
-                      // - button
-                      Container(
-                        width: 45,
-                        child: 
-                          RaisedButton(
-                            onPressed: (){
-                              print("clicked ${id}");
-                              appcontext.cart.minusItem(
-                                appcontext.CartItem()
-                                ..id = item.id
-                                ..name = item.title
-                                ..price = item.price
-                                ..item = item
-                                );
-                                setState(() {
-                                  
-                                });
-                            },
-                            child: Text("-"),
-                          ),
-                          
-                      ),
+                      numOfItemWIdget(id, item),
                       Container(
                         margin: EdgeInsets.only(left: 30),
                         child: Text("${item.price}",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,)
