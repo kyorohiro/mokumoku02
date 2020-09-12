@@ -12,11 +12,32 @@ class CartItem {
 
 class Cart {
   Map<String,CartItem>  items = {};
-  addItem(CartItem item) {
+  Map<String,int>  numberOfOrderSet = {};
+  plusItem(CartItem item) {
     items[item.id] = item;
+    if(!numberOfOrderSet.containsKey(item.id)) {
+      numberOfOrderSet[item.id] = 1;
+    } else {
+      numberOfOrderSet[item.id] = numberOfOrderSet[item.id] + 1;
+    }
   }
+
+  minusItem(CartItem item) {
+    if(numberOfOrderSet.containsKey(item.id)) {
+      numberOfOrderSet[item.id] = numberOfOrderSet[item.id] - 1;
+    }
+  }
+
   bool contain(String id){
     return items.containsKey(id);
+  }
+
+  int getNumberOfOrder(String id) {
+    if(numberOfOrderSet.containsKey(id)) {
+      return numberOfOrderSet[id];
+    } else {
+      return 0;
+    } 
   }
 
 }
@@ -158,116 +179,136 @@ class MyApp extends StatelessWidget {
           })
         ],
       ),
-      body: testWidget(),
+      body: MenuItemWidget(),
     );
   }
 }
 
 
-Widget testWidget() {
-  return ListView.builder(
-    itemCount: __todoMenus.length,
-    itemBuilder: (context, index) {
-      var item = __todoMenus[index];
-      var title = item.title; 
-      var id = item.id;
-      
-      return Container(
-        height: 200,
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
-        color: (index%2==0?Colors.red:Colors.blue),
-        child: Row(
 
-          mainAxisSize: MainAxisSize.min ,
-          children: [
-            //
-            // Container(width: 200,height: 200, color: Colors.amber,),
-            ImageWithLoading(200,item.getImage),
-            //
-            //
-            Expanded(child: 
-            //Container(height: 200,color: Colors.white30, child: Text("xx"),),),            
-             Container(
-              color: Colors.white30,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 60,
-                    color: Colors.black38,
-                    child: Text("Food Name",style: TextStyle(fontSize: 40.0),),
-                  ),                  
-                  Container(
-                    height: 60,
-                    child: 
-                    Text("desciption. asdfasdf.asdfa.sf..asdfasf,as ,asfd ,asf, asf,d a,sd,f "),
-                  ),
-                  Container(
-                    width: 3000,
-                    height: 60,
-                    color: Colors.black38,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        // + button
-                        Container(
-                          width: 45,
-                          child: 
-                            RaisedButton(
-                              onPressed: (){
-                                print("clicked ${id}");
-                                __cart.addItem(
-                                  CartItem()
-                                  ..id = item.id
-                                  ..name = item.title
-                                  ..price = item.price
-                                  ..item = item
-                                  );
-                              },
-                              child: Text("+"),
-                            ),
-                            
-                        ),
-                        
-                        Container(
-                          color: Colors.white,
-                          height: 35,
-                          width: 45,
-                          child: Align(alignment: Alignment.center,child:Text("1")),
-                        ),
-                        // - button
-                        Container(
-                          width: 45,
-                          child: 
-                            RaisedButton(
-                              onPressed: (){
-                                print("clicked ${id}");
-                                __cart.addItem(
-                                  CartItem()
-                                  ..id = item.id
-                                  ..name = item.title
-                                  ..price = item.price
-                                  ..item = item
-                                  );
-                              },
-                              child: Text("-"),
-                            ),
-                            
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 30),
-                          child: Text("800",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,)
-                        )
-                      ],)
-                     
-                  ),    
-                ],)
-            )),
-          ],
-        ),
-      );     
-    },);
+class MenuItemWidget extends StatefulWidget {
+  @override
+  _MenuItemWidgetState createState() => _MenuItemWidgetState();
+}
+
+class _MenuItemWidgetState extends State<MenuItemWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return testWidget();
+  }
+
+  Widget testWidget() {
+
+    return ListView.builder(
+      itemCount: __todoMenus.length,
+      itemBuilder: (context, index) {
+        var item = __todoMenus[index];
+        var title = item.title; 
+        var id = item.id;
+        
+        return Container(
+          height: 200,
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          color: (index%2==0?Colors.red:Colors.blue),
+          child: Row(
+
+            mainAxisSize: MainAxisSize.min ,
+            children: [
+              //
+              // Container(width: 200,height: 200, color: Colors.amber,),
+              ImageWithLoading(200,item.getImage),
+              //
+              //
+              Expanded(child: 
+              //Container(height: 200,color: Colors.white30, child: Text("xx"),),),            
+              Container(
+                color: Colors.white30,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 60,
+                      color: Colors.black38,
+                      child: Text("Food Name",style: TextStyle(fontSize: 40.0),),
+                    ),                  
+                    Container(
+                      height: 60,
+                      child: 
+                      Text("desciption. asdfasdf.asdfa.sf..asdfasf,as ,asfd ,asf, asf,d a,sd,f "),
+                    ),
+                    Container(
+                      width: 3000,
+                      height: 60,
+                      color: Colors.black38,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // + button
+                          Container(
+                            width: 45,
+                            child: 
+                              RaisedButton(
+                                onPressed: (){
+                                  print("clicked ${id}");
+                                  __cart.plusItem(
+                                    CartItem()
+                                    ..id = item.id
+                                    ..name = item.title
+                                    ..price = item.price
+                                    ..item = item
+                                    );
+                                    setState(() {
+                                      
+                                    });
+                                },
+                                child: Text("+"),
+                              ),
+                              
+                          ),
+                          
+                          Container(
+                            color: Colors.white,
+                            height: 35,
+                            width: 45,
+                            child: Align(alignment: Alignment.center,child:Text("${__cart.getNumberOfOrder(item.id)}")),
+                          ),
+                          // - button
+                          Container(
+                            width: 45,
+                            child: 
+                              RaisedButton(
+                                onPressed: (){
+                                  print("clicked ${id}");
+                                  __cart.minusItem(
+                                    CartItem()
+                                    ..id = item.id
+                                    ..name = item.title
+                                    ..price = item.price
+                                    ..item = item
+                                    );
+                                    setState(() {
+                                      
+                                    });
+                                },
+                                child: Text("-"),
+                              ),
+                              
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 30),
+                            child: Text("800",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,)
+                          )
+                        ],)
+                      
+                    ),    
+                  ],)
+              )),
+            ],
+          ),
+        );     
+      },);
+  }
 }
 
 typedef ImageGetFunction = Future<Image> Function();
