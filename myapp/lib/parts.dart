@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 typedef ImageGetFunction = Future<Image> Function();
+
 class ImageWithLoading extends StatefulWidget {
   ImageGetFunction f;
   int size;
@@ -10,7 +11,6 @@ class ImageWithLoading extends StatefulWidget {
   @override
   _ImageWithLoadingState createState() => _ImageWithLoadingState();
 }
-
 
 class _ImageWithLoadingState extends State<ImageWithLoading> {
   @override

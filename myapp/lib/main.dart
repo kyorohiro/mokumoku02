@@ -2,57 +2,17 @@ import 'package:flutter/material.dart';
 import './client.dart' as client;
 import './menupage.dart' as menupage;
 import './parts.dart' as parts;
-
-class CartItem {
-  String id;
-  String name;
-  int price;
-  // ...
-  client.Item item;
-}
-
-class Cart {
-  Map<String,CartItem>  items = {};
-  Map<String,int>  numberOfOrderSet = {};
-  plusItem(CartItem item) {
-    items[item.id] = item;
-    if(!numberOfOrderSet.containsKey(item.id)) {
-      numberOfOrderSet[item.id] = 1;
-    } else {
-      numberOfOrderSet[item.id] = numberOfOrderSet[item.id] + 1;
-    }
-  }
-
-  minusItem(CartItem item) {
-    if(numberOfOrderSet.containsKey(item.id)) {
-      numberOfOrderSet[item.id] = numberOfOrderSet[item.id] - 1;
-    }
-  }
-
-  bool contain(String id){
-    return items.containsKey(id);
-  }
-
-  int getNumberOfOrder(String id) {
-    if(numberOfOrderSet.containsKey(id)) {
-      return numberOfOrderSet[id];
-    } else {
-      return 0;
-    } 
-  }
-
-}
+import './app.dart' as appcontext;
 
 // Beak Time ..
 
 //
 // golobal prop
-List<client.Item> todoMenus;
-Cart cart = new Cart();
+
 
 void main() async {
   // test 
-  todoMenus = await client.createMenuClient().getMenus();
+  appcontext.todoMenus = await client.createMenuClient().getMenus();
 
   runApp( MaterialApp(
     home: menupage.MyMenuPage()
@@ -83,8 +43,8 @@ class MyBasket extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var density = MediaQuery.of(context).devicePixelRatio; 
-    var itemIds =  cart.items.keys.toList();
-    var items = itemIds.map((e) => menuItemWidget(screenWidth,cart.items[e].item)).toList();
+    var itemIds =  appcontext.cart.items.keys.toList();
+    var items = itemIds.map((e) => menuItemWidget(screenWidth,appcontext.cart.items[e].item)).toList();
    // var items = itemIds.map((e) => Text("${__cart.items[e].name}")).toList();
 
     return Scaffold(
@@ -110,12 +70,12 @@ class MyBasket extends StatelessWidget {
   }
 
   Widget itemList() {
-    var items =  cart.items.keys.toList();
+    var items =  appcontext.cart.items.keys.toList();
     return 
     ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-      return Text("${cart.items[items[index]].name}");
+      return Text("${appcontext.cart.items[items[index]].name}");
     },);
     //Text("Bucket !!");
   }

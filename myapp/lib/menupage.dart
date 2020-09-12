@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './client.dart' as client;
 import 'main.dart' as basketpage;
-import 'main.dart' as appcontext;
+import './app.dart' as appcontext;
 import './parts.dart' as parts;
 
 //
