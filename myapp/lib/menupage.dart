@@ -18,9 +18,11 @@ class MyMenuPage extends StatelessWidget {
             ),
             onPressed: (){
               print("click backet");
+              Navigator.pushNamed(context, "/cart");
+              /*
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return basketpage.MyBasket();
-              },));
+              },));*/
           })
         ],
       ),
