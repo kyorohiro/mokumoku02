@@ -2,7 +2,7 @@ import './client.dart' as client;
 
 List<client.Item> todoMenus;
 Cart cart = new Cart();
-
+var currencyUnit = "¥";
 
 class Cart {
   Map<String, client.Item>  items = {};
@@ -14,6 +14,17 @@ class Cart {
     } else {
       numberOfOrderSet[item.id] = numberOfOrderSet[item.id] + 1;
     }
+  }
+
+  int totalPrice() {
+    var keys = numberOfOrderSet.keys;
+    int totalPrice = 0;
+    for(var k in keys) {
+      int price = cart.items[k].price;
+      int num = numberOfOrderSet[k];
+      totalPrice = price * num;
+    }
+    return totalPrice;
   }
 
   minusItem(client.Item item) {

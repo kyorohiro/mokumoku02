@@ -13,7 +13,7 @@ class MyBasket extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Order List"),),
-      body: body(context);
+      body: body(context)
     );
   }
 
@@ -28,6 +28,9 @@ class MyBasket extends StatelessWidget {
               child: Column(
                 children: items,
               ),
+            ),
+            Container(
+              child: Text("Total : ${appcontext.currencyUnit} ${appcontext.cart.totalPrice()}"),
             ),
             Builder(builder: (BuildContext context){
               return RaisedButton(
@@ -54,7 +57,7 @@ class MyBasket extends StatelessWidget {
           Container(
             height: 30,
             color: Colors.black38,
-            child: Text("Food Name",style: TextStyle(fontSize: 20.0),),
+            child: Text("${item.name}", style: TextStyle(fontSize: 20.0),),
           ), 
           Container(
             width: double.infinity,
@@ -63,7 +66,8 @@ class MyBasket extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text("800",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,),
+                Text("${appcontext.cart.getNumberOfOrder(item.id)} x ",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,),
+                Text("${appcontext.currencyUnit} ${item.price}",style: TextStyle(fontSize: 40.0),textAlign: TextAlign.end,),
               ],)
           ),    
         ],)
