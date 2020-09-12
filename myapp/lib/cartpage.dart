@@ -8,21 +8,7 @@ import './parts.dart' as parts;
 // Cart Pages
 //
 class MyBasket extends StatelessWidget {
-  Widget titleWidget() {
-    return 
-    Container(
-      child:
-        Text("order list",
-          textAlign: TextAlign.center,
-          style: 
-            TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 40,
-              ),
-          ), 
-      color:Colors.amber, 
-      width: double.infinity,);
-  }
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -30,21 +16,25 @@ class MyBasket extends StatelessWidget {
     var items = itemIds.map((e) => menuItemWidget(screenWidth,appcontext.cart.items[e])).toList();
 
     return Scaffold(
-      appBar: AppBar(title: Text("Cart!!"),),
+      appBar: AppBar(title: Text("Order List"),),
       body:
       SingleChildScrollView(
         child: Column(
           children: [
-            titleWidget(),
             Container(
               child: Column(
                 children: items,
               ),
             ),
-            RaisedButton(onPressed: (){
-              print("order");
-            }, child: Text("Order!!"),)
-            ]
+            RaisedButton(
+              onPressed: (){
+                print("order");
+             }, 
+             child: Container(
+                width: double.infinity,
+                child: Text("Order!!", textAlign: TextAlign.center,)),
+            )
+          ]
 
         ),
       )
